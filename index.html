@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ Thống Thi Trắc Nghiệm</title>
+    <style>
+    body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 20px;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #007bff;
+}
+
+.hidden {
+    display: none;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.question {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.options {
+    list-style: none;
+    padding: 0;
+}
+
+.options li {
+    margin: 8px 0;
+    padding: 10px;
+    background: #e9ecef;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.options li:hover {
+    background: #d6d8db;
+}
+
+    </style>
+</head>
+<body>
+    <h2>Hệ Thống Thi Trắc Nghiệm</h2>
+    <div id="user-form">
+        <label>Họ và Tên: <input type="text" id="name"></label><br>
+        <label>Ngày sinh: <input type="date" id="dob"></label><br>
+        <label>Mã sinh viên: <input type="text" id="student-id"></label><br>
+        <label>Lớp: <input type="text" id="class"></label><br>
+        <button onclick="startQuiz()">Bắt đầu</button>
+    </div>
+    
+    <div id="quiz" class="hidden">
+        <h3>Câu hỏi</h3>
+        <div id="question-container">
+            <p>1. Mọi quy tắc xử sự tồn tại trong xã hội có nhà nước đều là pháp luật.</p>
+            <label><input type="radio" name="q1" value="Đúng"> Đúng</label>
+            <label><input type="radio" name="q1" value="Sai"> Sai</label>
+
+            <p>2. Nhà nước ra đời, tồn tại và phát triển gắn liền với xã hội có giai cấp.</p>
+            <label><input type="radio" name="q2" value="Đúng"> Đúng</label>
+            <label><input type="radio" name="q2" value="Sai"> Sai</label>
+
+            <p>3. Tùy vào các kiểu nhà nước khác nhau mà bản chất nhà nước có thể là bản chất giai cấp hoặc bản chất xã hội.</p>
+            <label><input type="radio" name="q3" value="Đúng"> Đúng</label>
+            <label><input type="radio" name="q3" value="Sai"> Sai</label>
+
+            <p>4. Nhà nước mang bản chất giai cấp có nghĩa là nhà nước chỉ thuộc về một giai cấp hoặc một liên minh giai cấp nhất định trong xã hội.</p>
+            <label><input type="radio" name="q4" value="Đúng"> Đúng</label>
+            <label><input type="radio" name="q4" value="Sai"> Sai</label>
+
+            <p>5. Nhà nước là một bộ máy cưỡng chế đặc biệt do giai cấp thông trị tổ chức ra và sử dụng để thể hiện sự thống trị đối với xã hội.</p>
+            <label><input type="radio" name="q5" value="Đúng"> Đúng</label>
+            <label><input type="radio" name="q5" value="Sai"> Sai</label>
+
+            <p>6. Không chỉ nhà nước mới có bộ máy chuyên chế làm nhiệm vụ cưỡng chế, điều đó đã tồn tại từ xã hội cộng sản nguyên thủy.</p>
+            <label><input type="radio" name="q6" value="Đúng"> Đúng</label>
+            <label><input type="radio" name="q6" value="Sai"> Sai</label>
+
+            <p>7. Nhà nước là một bộ máy bạo lực do giai cấp thống trị tổ chức ra để trấn áp các giai cấp đối kháng.</p>
+            <label><input type="radio" name="q7" value="Đúng"> Đúng</label>
+            <label><input type="radio" name="q7" value="Sai"> Sai</label>
+
+            <p>8. Nhà nước trong xã hội có cấp quản lý dân cư theo sự khác biệt về chính trị, tôn giáo, địa vị giai cấp.</p>
+            <label><input type="radio" name="q8" value="Đúng"> Đúng</label>
+            <label><input type="radio" name="q8" value="Sai"> Sai</label>
+
+            <p>9. Trong ba loại quyền lực kinh tế, quyền lực chính trị, quyền lực tư tưởng thì quyền lực chính trị đóng vai trò quan trọng nhất vì nó đảm bảo sức mạnh cưỡng chế của giai cấp thống trị đối với giai cấp bị trị.</p>
+            <label><input type="radio" name="q9" value="Đúng"> Đúng</label>
+            <label><input type="radio" name="q9" value="Sai"> Sai</label>
+
+            <p>10. Kiểu nhà nước là cách tổ chức quyền lực của nhà nước và những phương pháp để thực hiện quyền lực nhà nước.</p>
+            <label><input type="radio" name="q10" value="Đúng"> Đúng</label>
+            <label><input type="radio" name="q10" value="Sai"> Sai</label>
+            
+            <p>11. Chọn một đáp án đúng?</p>
+            <label><input type="radio" name="q11" value="A"> A</label>
+            <label><input type="radio" name="q11" value="B"> B</label>
+            <label><input type="radio" name="q11" value="C"> C</label>
+            <label><input type="radio" name="q11" value="D"> D</label>
+
+            <p>12. Chọn một đáp án đúng?</p>
+            <label><input type="radio" name="q12" value="A"> A</label>
+            <label><input type="radio" name="q12" value="B"> B</label>
+            <label><input type="radio" name="q12" value="C"> C</label>
+            <label><input type="radio" name="q12" value="D"> D</label>
+
+            <p>13. Chọn một đáp án đúng?</p>
+            <label><input type="radio" name="q13" value="A"> A</label>
+            <label><input type="radio" name="q13" value="B"> B</label>
+            <label><input type="radio" name="q13" value="C"> C</label>
+            <label><input type="radio" name="q13" value="D"> D</label>
+
+            <p>14. Chọn một đáp án đúng?</p>
+            <label><input type="radio" name="q14" value="A"> A</label>
+            <label><input type="radio" name="q14" value="B"> B</label>
+            <label><input type="radio" name="q14" value="C"> C</label>
+            <label><input type="radio" name="q14" value="D"> D</label>
+
+            <p>15. Chọn một đáp án đúng?</p>
+            <label><input type="radio" name="q15" value="A"> A</label>
+            <label><input type="radio" name="q15" value="B"> B</label>
+            <label><input type="radio" name="q15" value="C"> C</label>
+            <label><input type="radio" name="q15" value="D"> D</label>
+
+            <p>16. Chọn một đáp án đúng?</p>
+            <label><input type="radio" name="q16" value="A"> A</label>
+            <label><input type="radio" name="q16" value="B"> B</label>
+            <label><input type="radio" name="q16" value="C"> C</label>
+            <label><input type="radio" name="q16" value="D"> D</label>
+
+            <p>17. Chọn một đáp án đúng?</p>
+            <label><input type="radio" name="q17" value="A"> A</label>
+            <label><input type="radio" name="q17" value="B"> B</label>
+            <label><input type="radio" name="q17" value="C"> C</label>
+            <label><input type="radio" name="q17" value="D"> D</label>
+
+            <p>18. Chọn một đáp án đúng?</p>
+            <label><input type="radio" name="q18" value="A"> A</label>
+            <label><input type="radio" name="q18" value="B"> B</label>
+            <label><input type="radio" name="q18" value="C"> C</label>
+            <label><input type="radio" name="q18" value="D"> D</label>
+
+            <p>19. Chọn một đáp án đúng?</p>
+            <label><input type="radio" name="q19" value="A"> A</label>
+            <label><input type="radio" name="q19" value="B"> B</label>
+            <label><input type="radio" name="q19" value="C"> C</label>
+            <label><input type="radio" name="q19" value="D"> D</label>
+
+            <p>20. Chọn một đáp án đúng?</p>
+            <label><input type="radio" name="q20" value="A"> A</label>
+            <label><input type="radio" name="q20" value="B"> B</label>
+            <label><input type="radio" name="q20" value="C"> C</label>
+            <label><input type="radio" name="q20" value="D"> D</label>
+            
+            <p>21. Chọn nhiều đáp án đúng?</p>
+            <label><input type="checkbox" name="q21" value="A"> A</label>
+            <label><input type="checkbox" name="q21" value="B"> B</label>
+            <label><input type="checkbox" name="q21" value="C"> C</label>
+            <label><input type="checkbox" name="q21" value="D"> D</label>
+
+            <p>22. Chọn nhiều đáp án đúng?</p>
+            <label><input type="checkbox" name="q22" value="A"> A</label>
+            <label><input type="checkbox" name="q22" value="B"> B</label>
+            <label><input type="checkbox" name="q22" value="C"> C</label>
+            <label><input type="checkbox" name="q22" value="D"> D</label>
+
+            <p>23. Chọn nhiều đáp án đúng?</p>
+            <label><input type="checkbox" name="q23" value="A"> A</label>
+            <label><input type="checkbox" name="q23" value="B"> B</label>
+            <label><input type="checkbox" name="q23" value="C"> C</label>
+            <label><input type="checkbox" name="q23" value="D"> D</label>
+
+            <p>24. Chọn nhiều đáp án đúng?</p>
+            <label><input type="checkbox" name="q24" value="A"> A</label>
+            <label><input type="checkbox" name="q24" value="B"> B</label>
+            <label><input type="checkbox" name="q24" value="C"> C</label>
+            <label><input type="checkbox" name="q24" value="D"> D</label>
+
+            <p>25. Chọn nhiều đáp án đúng?</p>
+            <label><input type="checkbox" name="q25" value="A"> A</label>
+            <label><input type="checkbox" name="q25" value="B"> B</label>
+            <label><input type="checkbox" name="q25" value="C"> C</label>
+            <label><input type="checkbox" name="q25" value="D"> D</label>
+
+            <p>26. Chọn nhiều đáp án đúng?</p>
+            <label><input type="checkbox" name="q26" value="A"> A</label>
+            <label><input type="checkbox" name="q26" value="B"> B</label>
+            <label><input type="checkbox" name="q26" value="C"> C</label>
+            <label><input type="checkbox" name="q26" value="D"> D</label>
+
+            <p>27. Chọn nhiều đáp án đúng?</p>
+            <label><input type="checkbox" name="q27" value="A"> A</label>
+            <label><input type="checkbox" name="q27" value="B"> B</label>
+            <label><input type="checkbox" name="q27" value="C"> C</label>
+            <label><input type="checkbox" name="q27" value="D"> D</label>
+
+            <p>28. Chọn nhiều đáp án đúng?</p>
+            <label><input type="checkbox" name="q28" value="A"> A</label>
+            <label><input type="checkbox" name="q28" value="B"> B</label>
+            <label><input type="checkbox" name="q28" value="C"> C</label>
+            <label><input type="checkbox" name="q28" value="D"> D</label>
+
+            <p>29. Chọn nhiều đáp án đúng?</p>
+            <label><input type="checkbox" name="q29" value="A"> A</label>
+            <label><input type="checkbox" name="q29" value="B"> B</label>
+            <label><input type="checkbox" name="q29" value="C"> C</label>
+            <label><input type="checkbox" name="q29" value="D"> D</label>
+
+            <p>30. Chọn nhiều đáp án đúng?</p>
+            <label><input type="checkbox" name="q30" value="A"> A</label>
+            <label><input type="checkbox" name="q30" value="B"> B</label>
+            <label><input type="checkbox" name="q30" value="C"> C</label>
+            <label><input type="checkbox" name="q30" value="D"> D</label>
+            
+            <p>31. Nhà hàng thức ăn nhanh nào được thành lập đầu tiên?</p>
+            <textarea name="q31" rows="3" cols="50"></textarea>
+
+            <p>32. Pizza Hut đầu tiên được xây dựng ở đâu?</p>
+            <textarea name="q32" rows="3" cols="50"></textarea>
+
+            <p>33. Khoai tây chiên kiểu Pháp có nguồn gốc từ nước nào?</p>
+            <textarea name="q33" rows="3" cols="50"></textarea>
+
+            <p>34. Nhà hàng thức ăn nhanh nào phục vụ món “Double Down”?</p>
+            <textarea name="q34" rows="3" cols="50"></textarea>
+
+            <p>35. Five Guys sử dụng loại dầu nào để chiên thức ăn?</p>
+            <textarea name="q35" rows="3" cols="50"></textarea>
+
+            <p>36. Nhà hàng thức ăn nhanh nào nổi tiếng với món hamburger hình vuông?</p>
+            <textarea name="q36" rows="3" cols="50"></textarea>
+
+            <p>37. Thành phần chính trong nước sốt tzatziki truyền thống của Hy Lạp là gì?</p>
+            <textarea name="q37" rows="3" cols="50"></textarea>
+
+            <p>38. Thành phần chính trong món guacamole truyền thống của Mexico là gì?</p>
+            <textarea name="q38" rows="3" cols="50"></textarea>
+
+            <p>39. Chuỗi thức ăn nhanh nào được biết đến với bánh mì Footlong?</p>
+            <textarea name="q39" rows="3" cols="50"></textarea>
+
+            <p>40. Thành phần chính trong samosas truyền thống của Ấn Độ là gì?</p>
+            <textarea name="q40" rows="3" cols="50"></textarea>
+        </div>
+        <button onclick="submitQuiz()">Nộp bài</button>
+    </div>
+    
+    <div id="result" class="hidden">
+        <h3>Kết quả</h3>
+        <p id="score"></p>
+    </div>
+    
+    <script>
+        const answers = {
+            q1: "Đúng",
+            q1: "Đúng",
+            q1: "Đúng",
+            q1: "Đúng",
+            q1: "Đúng",
+            q1: "Đúng",
+            q1: "Đúng",
+            q1: "Đúng",
+            q1: "Đúng",
+            q1: "Đúng",
+
+            q2: "A",
+            q2: "A",
+            q2: "A",
+            q2: "A",
+            q2: "A",
+            q2: "A",
+            q2: "A",
+            q2: "A",
+            q2: "A",
+            q2: "A",
+
+            q3: ["A", "C"],
+            q3: ["A", "C"],
+            q3: ["A", "C"],
+            q3: ["A", "C"],
+            q3: ["A", "C"],
+            q3: ["A", "C"],
+            q3: ["A", "C"],
+            q3: ["A", "C"],
+            q3: ["A", "C"],
+            q3: ["A", "C"],
+
+            q4_keywords: ["câu", "trả lời", "đúng"],
+            q4_keywords: ["câu", "trả lời", "đúng"],
+            q4_keywords: ["câu", "trả lời", "đúng"],
+            q4_keywords: ["câu", "trả lời", "đúng"],
+            q4_keywords: ["câu", "trả lời", "đúng"],
+            q4_keywords: ["câu", "trả lời", "đúng"],
+            q4_keywords: ["câu", "trả lời", "đúng"],
+            q4_keywords: ["câu", "trả lời", "đúng"],
+            q4_keywords: ["câu", "trả lời", "đúng"],
+            q4_keywords: ["câu", "trả lời", "đúng"]
+
+        };
+        
+        function startQuiz() {
+            document.getElementById('user-form').classList.add('hidden');
+            document.getElementById('quiz').classList.remove('hidden');
+        }
+        
+        function submitQuiz() {
+            let score = 0;
+            let totalScore = 10; // Tổng điểm là 10
+            let questionWeight = totalScore / 40; // Chia đều điểm cho 4 câu
+            
+            let selectedQ1 = document.querySelector('input[name="q1"]:checked');
+            if (selectedQ1 && selectedQ1.value === answers.q1) {
+                score += questionWeight;
+            }
+            
+            let selectedQ2 = document.querySelector('input[name="q2"]:checked');
+            if (selectedQ2 && selectedQ2.value === answers.q2) {
+                score += questionWeight;
+            }
+            
+            let selectedQ3 = [...document.querySelectorAll('input[name="q3"]:checked')].map(el => el.value);
+            if (JSON.stringify(selectedQ3.sort()) === JSON.stringify(answers.q3.sort())) {
+                score += questionWeight;
+            }
+            
+            
+            
+            document.getElementById('quiz').classList.add('hidden');
+            document.getElementById('result').classList.remove('hidden');
+            document.getElementById('score').innerText = `Bạn đạt ${score.toFixed(2)}/${totalScore} điểm.`;
+            alert("Đồng ý nộp bài?")
+            console.log("OK")
+        }
+    </script>
+</body>
+</html>
